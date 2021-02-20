@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 19, 2021 at 07:20 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
+-- Generation Time: Feb 20, 2021 at 05:27 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -225,6 +225,33 @@ INSERT INTO `machine_type` (`mtype_id`, `mtype_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `services_requests`
+--
+
+CREATE TABLE `services_requests` (
+  `sr_id` int(11) NOT NULL COMMENT 'ไอดีการขอรับบริการ',
+  `tid` int(11) NOT NULL COMMENT 'ไอดีคำนำหน้าผู้ขอรับบริการ',
+  `sr_u_fname_th` varchar(100) NOT NULL COMMENT 'ชื่อผู้ขอรับบริการ ไทย',
+  `sr_u_fname_en` varchar(100) NOT NULL COMMENT 'ชื่อผู้ขอรับบริการ อังกฤษ',
+  `sr_email` varchar(100) NOT NULL COMMENT 'อีเมล ',
+  `sr_tel` varchar(20) NOT NULL COMMENT 'เบอร์โทรศัพท์',
+  `dep_id` int(11) NOT NULL COMMENT 'ไอดีของคณะผู้ขอรับบริการ',
+  `bid` int(11) NOT NULL COMMENT 'brand ของผู้ขอรับบริการ',
+  `mtype_id` int(11) NOT NULL COMMENT 'ไอดีชนิดเครื่อง ของผู้ขอรับบริการ',
+  `sr_item_user` text NOT NULL COMMENT 'สิ่งที่มาพร้อมเครื่อง',
+  `sr_Important_data` text NOT NULL COMMENT 'ข้อมูลสำคัญที่ต้องเก็บ',
+  `sr_password_machine` text NOT NULL COMMENT 'รหัสเข้าเครื่อง',
+  `cid` int(11) NOT NULL COMMENT 'สาเหตุเบื้องต้น',
+  `sr_c_orther` text NOT NULL COMMENT 'สาเหตุอื่นๆ',
+  `sr_id_card_number` varchar(20) DEFAULT '0' COMMENT 'เลขบัตรประชาชน 13 หลัก',
+  `ut_id` int(11) NOT NULL COMMENT 'รปะเภทของผู้ขอรับบริการ',
+  `sr_machine_number` varchar(100) DEFAULT NULL COMMENT 'หมายเลขเครื่อง',
+  `sr_user_position` varchar(100) DEFAULT NULL COMMENT 'ตำแหน่ง กรณีผู้ขอรับบริการ ไม่ใช่นิสต'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ตารางการขอรับบริการ';
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `success`
 --
 
@@ -339,17 +366,34 @@ CREATE TABLE `users` (
   `status` varchar(10) NOT NULL
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `users`
+-- Table structure for table `users_type`
 --
 
-INSERT INTO `users` (`b_id`, `username`, `pwd`, `name`, `status`) VALUES
-(1, 'b', '1', 'วิทวัส บุญลือ', 'นิสิต'),
-(2, 'b', '2', 'บดินทร์ นาพิลา', 'นิสิต');
+CREATE TABLE `users_type` (
+  `ut_id` int(11) NOT NULL COMMENT 'ไอดีประเภทผู้ใช้งาน',
+  `ut_name` varchar(100) NOT NULL COMMENT 'ชื่อประเภทผู้ใช้งาน'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users_type`
+--
+
+INSERT INTO `users_type` (`ut_id`, `ut_name`) VALUES
+(1, 'นิสิต'),
+(2, 'บุคคลากร');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`a_id`);
 
 --
 -- Indexes for table `brand`
@@ -364,14 +408,56 @@ ALTER TABLE `cause`
   ADD PRIMARY KEY (`cid`);
 
 --
+-- Indexes for table `department`
+--
+ALTER TABLE `department`
+  ADD PRIMARY KEY (`dep_id`);
+
+--
+-- Indexes for table `machine_type`
+--
+ALTER TABLE `machine_type`
+  ADD PRIMARY KEY (`mtype_id`);
+
+--
+-- Indexes for table `services_requests`
+--
+ALTER TABLE `services_requests`
+  ADD PRIMARY KEY (`sr_id`);
+
+--
+-- Indexes for table `success`
+--
+ALTER TABLE `success`
+  ADD PRIMARY KEY (`s_id`);
+
+--
 -- Indexes for table `title_name`
 --
 ALTER TABLE `title_name`
   ADD PRIMARY KEY (`tid`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`b_id`);
+
+--
+-- Indexes for table `users_type`
+--
+ALTER TABLE `users_type`
+  ADD PRIMARY KEY (`ut_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `a_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `brand`
@@ -386,10 +472,46 @@ ALTER TABLE `cause`
   MODIFY `cid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `department`
+--
+ALTER TABLE `department`
+  MODIFY `dep_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `machine_type`
+--
+ALTER TABLE `machine_type`
+  MODIFY `mtype_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `services_requests`
+--
+ALTER TABLE `services_requests`
+  MODIFY `sr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีการขอรับบริการ', AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `success`
+--
+ALTER TABLE `success`
+  MODIFY `s_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `title_name`
 --
 ALTER TABLE `title_name`
   MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `b_id` int(4) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users_type`
+--
+ALTER TABLE `users_type`
+  MODIFY `ut_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีประเภทผู้ใช้งาน', AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
