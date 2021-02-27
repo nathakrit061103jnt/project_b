@@ -185,7 +185,7 @@
                 <h4>Service From of Malntenance Computer system Mahasarakham University</h4>
 
                 <?php
-include_once "./connect_db.php";
+include_once "./connectdb.php";
 ?>
 
                 <form action="insert_data.php" method="post">

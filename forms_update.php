@@ -192,7 +192,7 @@ if (isset($_GET["sr_id"])) {
                 <h4>Service From of Malntenance Computer system Mahasarakham University</h4>
 
                 <?php
-include_once "./connect_db.php";
+include_once "./connectdb.php";
     ?>
 
                 <form action="update_data.php" method="post">
@@ -353,7 +353,7 @@ if ($data['cid'] == $item['cid']) {
 
                         <div class="form-group col-md-6">
                             <label for="inputCity">สาเหตุอื่นๆ</label>
-                            <input required type="text" value="<?=$item["sr_u_fname_th"];?>" name="sr_c_orther"
+                            <input required type="text" value="<?=$item["sr_c_orther"];?>" name="sr_c_orther"
                                 class="form-control" placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
                         </div>
                         <div class="form-group col-md-12">

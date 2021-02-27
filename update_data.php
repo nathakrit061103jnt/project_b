@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST["update_C1_tSubmit"])) {
-    include_once "./connect_db.php";
+    include_once "./connectdb.php";
     $sql = "UPDATE `services_requests`
            SET `tid` ='{$_POST["tid"]}', `sr_u_fname_th`='{$_POST["sr_u_fname_th"]}',
            `sr_u_fname_en`='{$_POST["sr_u_fname_en"]}', `sr_email`='{$_POST["sr_email"]}',
@@ -30,7 +30,7 @@ if (isset($_POST["update_C1_tSubmit"])) {
 }
 
 if (isset($_POST["update_C2_tSubmit"])) {
-    include_once "./connect_db.php";
+    include_once "./connectdb.php";
     $sql = "UPDATE `services_requests`
            SET `tid` ='{$_POST["tid"]}', `sr_u_fname_th`='{$_POST["sr_u_fname_th"]}',
           `sr_u_fname_en`='{$_POST["sr_u_fname_en"]}', `sr_email`='{$_POST["sr_email"]}',

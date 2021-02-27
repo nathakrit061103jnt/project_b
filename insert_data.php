@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST["inser_C1_tSubmit"])) {
-    include_once "./connect_db.php";
+    include_once "./connectdb.php";
     $sql = "INSERT INTO `services_requests` (`sr_id`, `tid`, `sr_u_fname_th`, `sr_u_fname_en`,
           `sr_email`, `sr_tel`, `dep_id`, `bid`, `mtype_id`, `sr_item_user`, `sr_Important_data`,
           `sr_password_machine`, `cid`, `sr_c_orther`, `sr_id_card_number`, `ut_id`, `sr_machine_number`,
@@ -28,7 +28,7 @@ if (isset($_POST["inser_C1_tSubmit"])) {
 }
 
 if (isset($_POST["inser_C2_tSubmit"])) {
-    include_once "./connect_db.php";
+    include_once "./connectdb.php";
     $sql = "INSERT INTO `services_requests` (`sr_id`, `tid`, `sr_u_fname_th`, `sr_u_fname_en`,
           `sr_email`, `sr_tel`, `dep_id`, `bid`, `mtype_id`, `sr_item_user`, `sr_Important_data`,
           `sr_password_machine`, `cid`, `sr_c_orther`, `sr_id_card_number`, `ut_id`, `sr_machine_number`,
