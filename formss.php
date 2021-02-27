@@ -12,6 +12,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
     <style type="text/css">
+    }
+
+    html,
+    body {
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-family: 'Numans', sans-serif;
+    }
+
     input[type="text"] {
         font-size: 1.3em;
     }
@@ -49,7 +59,7 @@
 
         border: 0px solid red;
         padding: 0 0 25px 0;
-        width: 600px;
+        width: 61%;
         font-family: 'Prompt', sans-serif;
         font-size: 14px;
         margin: 10px auto;
@@ -149,11 +159,11 @@
                     <a class="navbar-brand" href="#"></a>
                     <!-- Logo -->
 
-                    <nav class="navbar navbar navbar-light bg-ligh">
-                        <a class="navbar-brand" href="t.php">
-                            <img class="mb-2" src="img/logo.png" alt="" width="240" height="65">
-                        </a>
-                    </nav>
+
+                    <a class="navbar-brand" href="t.php">
+                        <img class="mb-2" src="img/logo.png" alt="" width="240" height="65">
+                    </a>
+
                     <!-- Logo -->
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -165,11 +175,13 @@
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                             <li class="nav-item active">
                             <li class="nav-item">
-                                <a class="nav-link" href="t.php">ตรวจสอบสถานะการซ่อม<span
-                                        class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="t.php">
+                                    <center>ตรวจสอบสถานะการซ่อม<span class="sr-only">(current)</span>
+                                </a></center>
                             <li class="nav-item">
-                                <a class="nav-link" href="login.php">ออกจากระบบ<span
-                                        class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="index.php">
+                                    <center>ออกจากระบบ<span class="sr-only">(current)</span>
+                                </a></center>
                             </li>
                         </ul>
                     </div>
@@ -226,12 +238,29 @@ while ($row = mysqli_fetch_assoc($result)) {?>
                                         placeholder="กรอกเบอร์โทรศัพท์">
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-8">
-                                    <label for="Dep">คณะ/หน่วยงาน</label>
-                                    <select id="Dep" required name="dep_id" class="form-control">
-                                        <!-- <option selected>เลือก</option> -->
 
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="brand">ประเภทเครื่อง</label>
+                                    <select name="m_id" required class="form-control">
+                                        <!-- <option selected>เลือก</option> -->
+                                        <?php
+
+$sql = "SELECT * FROM machine";
+$rs = mysqli_query($conn, $sql);
+
+while ($data = mysqli_fetch_array($rs)) {
+    ?>
+                                        <option value="<?=$data['m_id'];?>"><?=$data['m_name'];?></option>
+                                        <?php }?>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="mType">คณะ/หน่วยงาน</label>
+                                    <select required name="dep_id" class="form-control">
+                                        <!-- <option selected>เลือก</option> -->
                                         <?php
 
 $sql = "SELECT * FROM department";
@@ -244,11 +273,12 @@ while ($data = mysqli_fetch_array($rs)) {
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-12">
                                     <label for="inputCity">ตำแหน่ง</label>
                                     <input type="text" required class="form-control" id="" name="sr_user_position"
                                         placeholder="กรอกตำแหน่งของท่าน">
                                 </div>
+
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -331,7 +361,8 @@ while ($data = mysqli_fetch_array($rs)) {
                             <div align="center">
                                 <button type="submit" name="inser_C2_tSubmit"
                                     class="btn btn-primary">บันทึกข้อมูล</button>
-                                <a href="./index.php" type="button" class="btn btn-danger">ยกเลิก</a>
+                                <a href="t.php" onClick=""> <button type="button"
+                                        class="btn btn-danger ">ยกเลิก</button></a>
                             </div>
                         </form>
                 </td>

@@ -1,3 +1,15 @@
+<?php date_default_timezone_set('asia/bangkok');?>
+
+<div class="col-md-3">
+    <input id="txt_year" name="txt_year" type="text" class="form-control input-md" value="<?=(date(" Y") + 543);?>"
+        hidden="">
+</div>
+<div class="col-md-3">
+    <input id="txt_time" name="txt_time" type="text" class="form-control input-md" value="<?=date(" h: i: s a");
+?>" hidden="">
+</div>
+
+
 <?php
 
 if (isset($_POST["update_C1_tSubmit"])) {
@@ -9,7 +21,9 @@ if (isset($_POST["update_C1_tSubmit"])) {
           `mtype_id`='{$_POST["mtype_id"]}',`sr_item_user`='{$_POST["sr_item_user"]}',
           `sr_Important_data`='{$_POST["sr_Important_data"]}', `sr_password_machine`='{$_POST["sr_password_machine"]}',
           `cid`='{$_POST["cid"]}', `sr_c_orther`='{$_POST["sr_c_orther"]}',
-          `sr_id_card_number`='{$_POST["sr_id_card_number"]}',`sr_std_id`='{$_POST["sr_std_id"]}'
+          `sr_id_card_number`='{$_POST["sr_id_card_number"]}',`studen_id`='{$_POST["studen_id"]}',
+           `status`='กำลังดำเนินการซ่อม',`day`='" . date("d") . "',`month`='" . date("m") . "',`year`='" . date("Y") . "'+543,
+           `time`='" . date("H:i") . "'
 
           WHERE `services_requests`.`sr_id` = '{$_POST["sr_id"]}';";
 
@@ -38,7 +52,9 @@ if (isset($_POST["update_C2_tSubmit"])) {
           `mtype_id`='{$_POST["mtype_id"]}',`sr_item_user`='{$_POST["sr_item_user"]}',
           `sr_Important_data`='{$_POST["sr_Important_data"]}', `sr_password_machine`='{$_POST["sr_password_machine"]}',
           `cid`='{$_POST["cid"]}', `sr_c_orther`='{$_POST["sr_c_orther"]}',
-           `sr_machine_number`='{$_POST["sr_machine_number"]}', `sr_user_position`='{$_POST["sr_user_position"]}'
+           `sr_machine_number`='{$_POST["sr_machine_number"]}', `sr_user_position`='{$_POST["sr_user_position"]}',
+           `status`='กำลังดำเนินการซ่อม',`day`='" . date("d") . "',`month`='" . date("m") . "',`year`='" . date("Y") . "'+543,
+           `time`='" . date("H:i") . "'
            WHERE `services_requests`.`sr_id` = '{$_POST["sr_id"]}';";
 
     if (mysqli_query($conn, $sql)) {

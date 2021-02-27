@@ -12,6 +12,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
     <style type="text/css">
+    }
+
+    html,
+    body {
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 600px;
+        font-family: 'Numans', sans-serif;
+    }
+
     input[type="text"] {
         font-size: 1.3em;
     }
@@ -49,7 +59,7 @@
 
         border: 0px solid red;
         padding: 0 0 25px 0;
-        width: 600px;
+        width: 61%;
         font-family: 'Prompt', sans-serif;
         font-size: 14px;
         margin: 10px auto;
@@ -152,11 +162,11 @@
             <a class="navbar-brand" href="#"></a>
             <!-- Logo -->
 
-            <nav class="navbar navbar navbar-light bg-ligh">
-                <a class="navbar-brand" href="t.php">
-                    <img class="mb-2" src="img/logo.png" alt="" width="240" height="65">
-                </a>
-            </nav>
+
+            <a class="navbar-brand" href="t.php">
+                <img class="mb-2" src="img/logo.png" alt="" width="240" height="65">
+            </a>
+
             <!-- Logo -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -167,16 +177,20 @@
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
                     <li class="nav-item">
-                        <a class="nav-link" href="t.php">ตรวจสอบสถานะการซ่อม<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="t.php">
+                            <center>ตรวจสอบสถานะการซ่อม<span class="sr-only">(current)</span>
+                        </a></center>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">ออกจากระบบ<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.php">
+                            <center>ออกจากระบบ<span class="sr-only">(current)</span>
+                        </a></center>
                     </li>
                 </ul>
             </div>
         </nav>
         <!-- เมนู -->
 
-        <!-- รูปตังอย่าง -->
+
         <td align="left" bgcolor="#FFFFFF">
             <div class="card ">
                 <h2>แบบฟอร์มขอรับบริการ
@@ -222,115 +236,137 @@ while ($row = mysqli_fetch_assoc($result)) {?>
                             <input type="email" class="form-control" name="sr_email" required placeholder="กรอก E-mail">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputPassword4">รหัสนิสิต</label>
-                            <input type="text" required class="form-control" name="sr_std_id"
-                                placeholder="กรอกรหัสนิสิต">
-                        </div>
-                        <div class="form-group col-md-12">
                             <label for="inputPassword4">เบอร์โทรศัพท์</label>
                             <input type="text" required class="form-control" name="sr_tel"
                                 placeholder="กรอกเบอร์โทรศัพท์">
                         </div>
-                    </div>
 
-                    <div class="form-group col-md-15">
-                        <label for="Dep">คณะ/หน่วยงาน</label>
-                        <select required name="dep_id" class="form-control">
-                            <!-- <option selected>เลือก</option> -->
-                            <?php
+                        <div class="form-group col-md-5">
+                            <label for="inputPassword4">รหัสนิสิต</label>
+                            <input type="text" class="form-control" name="studen_id" required
+                                placeholder="กรอกรหัสนิสิต">
+                        </div>
+                        <div class="form-group col-md-7">
+                            <label for="Dep">คณะ/หน่วยงาน</label>
+                            <select required name="dep_id" class="form-control">
+                                <!-- <option selected>เลือก</option> -->
+
+                                <?php
 
 $sql = "SELECT * FROM department";
 $rs = mysqli_query($conn, $sql);
 
 while ($data = mysqli_fetch_array($rs)) {
     ?>
-                            <option value="<?=$data['dep_id'];?>"><?=$data['dep_name'];?></option>
-                            <?php }?>
-                        </select>
-                    </div>
+                                <option value="<?=$data['dep_id'];?>"><?=$data['dep_name'];?></option>
+                                <?php }?>
+                            </select>
+                        </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="brand">ยี่ห้อ</label>
-                            <select required name="bid" class="form-control">
-                                <!-- <option selected>เลือก</option> -->
 
-                                <?php
+
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="brand">ยี่ห้อ</label>
+                                <select required name="bid" class="form-control">
+                                    <!-- <option selected>เลือก</option> -->
+
+                                    <?php
 
 $sql = "SELECT * FROM brand";
 $rs = mysqli_query($conn, $sql);
 
 while ($data = mysqli_fetch_array($rs)) {
     ?>
-                                <option value="<?=$data['bid'];?>"><?=$data['bname'];?></option>
-                                <?php }?>
-                            </select>
-                        </div>
+                                    <option value="<?=$data['bid'];?>"><?=$data['bname'];?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
 
-                        <div class="col-md-6">
-                            <label for="machine_type">ระบุชนิดเครื่อง</label>
-                            <select required name="mtype_id" class="form-control">
-                                <!-- <option selected>เลือก</option> -->
-                                <?php
+
+                            <div class="form-group col-md-4">
+                                <label for="brand">ประเภทเครื่อง</label>
+                                <select name="m_id" required class="form-control">
+                                    <!-- <option selected>เลือก</option> -->
+                                    <?php
+
+$sql = "SELECT * FROM machine";
+$rs = mysqli_query($conn, $sql);
+
+while ($data = mysqli_fetch_array($rs)) {
+    ?>
+                                    <option value="<?=$data['m_id'];?>"><?=$data['m_name'];?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+
+                            <div class="col-md-5">
+                                <label for="machine_type">ระบุชนิดเครื่อง</label>
+                                <select required name="mtype_id" class="form-control">
+                                    <!-- <option selected>เลือก</option> -->
+                                    <?php
 
 $sql = "SELECT * FROM machine_type";
 $rs = mysqli_query($conn, $sql);
 
 while ($data = mysqli_fetch_array($rs)) {
     ?>
-                                <option value="<?=$data['mtype_id'];?>"><?=$data['mtype_name'];?></option>
-                                <?php }?>
-                            </select>
-                        </div>
+                                    <option value="<?=$data['mtype_id'];?>"><?=$data['mtype_name'];?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
 
-                        <div class="form-group col-md-4">
-                            <label for="inputEmail4">สิ่งที่มาพร้อมเครื่อง</label>
-                            <input type="nameincluded" class="form-control" required name="sr_item_user"
-                                placeholder="ไม่มีให้ใส่เครื่องหมาย">
-                        </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputEmail4">สิ่งที่มาพร้อมเครื่อง</label>
+                                <input type="nameincluded" class="form-control" required name="sr_item_user"
+                                    placeholder="ไม่มีให้ใส่เครื่องหมาย">
+                            </div>
 
-                        <div class="form-group col-md-4">
-                            <label for="inputCity">ข้อมูลสำคัญที่ต้องเก็บ</label>
-                            <input type="text" class="form-control" required name="sr_Important_data"
-                                placeholder="เช่น Drive D">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputCity">รหัสเข้าเครื่อง</label>
-                            <input type="text" name="sr_password_machine" required class="form-control"
-                                placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="cause">สาเหตุเบื้องต้น</label>
-                            <select id="" name="cid" required class="form-control">
-                                <!-- <option selected>เลือก</option> -->
-                                <?php
+                            <div class="form-group col-md-4">
+                                <label for="inputCity">ข้อมูลสำคัญที่ต้องเก็บ</label>
+                                <input type="text" class="form-control" required name="sr_Important_data"
+                                    placeholder="เช่น Drive D">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputCity">รหัสเข้าเครื่อง</label>
+                                <input type="text" name="sr_password_machine" required class="form-control"
+                                    placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cause">สาเหตุเบื้องต้น</label>
+                                <select id="" name="cid" required class="form-control">
+                                    <!-- <option selected>เลือก</option> -->
+                                    <?php
 
 $sql = "SELECT * FROM cause";
 $rs = mysqli_query($conn, $sql);
 
 while ($data = mysqli_fetch_array($rs)) {
     ?>
-                                <option value="<?=$data['cid'];?>"><?=$data['cname'];?></option>
-                                <?php }?>
-                            </select>
-                        </div>
+                                    <option value="<?=$data['cid'];?>"><?=$data['cname'];?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">สาเหตุอื่นๆ</label>
-                            <input required type="text" name="sr_c_orther" class="form-control"
-                                placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">สาเหตุอื่นๆ</label>
+                                <input required type="text" name="sr_c_orther" class="form-control"
+                                    placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputCity">เลขบัตรประชาชน 13 หลัก</label>
+                                <input type="text" required class="form-control" name="sr_id_card_number"
+                                    placeholder="เฉพาะนิสิตที่นำมาติดตั้ง Windows/Microsoft 365">
+                            </div>
                         </div>
-                        <div class="form-group col-md-12">
-                            <label for="inputCity">เลขบัตรประชาชน 13 หลัก</label>
-                            <input type="text" required class="form-control" name="sr_id_card_number"
-                                placeholder="เฉพาะนิสิตที่นำมาติดตั้ง Windows/Microsoft 365">
-                        </div>
-
                     </div>
                     <div align="center">
                         <button type="submit" name="inser_C1_tSubmit" class="btn btn-primary">บันทึกข้อมูล</button>
-                        <a href="./index.php" type="button" class="btn btn-danger">ยกเลิก</a>
+                        <a href="t.php" onClick=""> <button type="button" class="btn btn-danger ">ยกเลิก</button></a>
+
                     </div>
                 </form>
         </td>
-        <!-- รูปตังอย่าง -->
+
+        <div class="form-row">

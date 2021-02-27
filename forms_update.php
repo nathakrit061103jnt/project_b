@@ -242,8 +242,8 @@ if ($item["tid"] = $row["tid"]) {
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">รหัสนิสิต</label>
-                            <input type="text" required class="form-control" value="<?=$item["sr_std_id"];?>"
-                                name="sr_std_id" placeholder="กรอกรหัสนิสิต">
+                            <input type="text" required class="form-control" value="<?=$item["studen_id"];?>"
+                                name="studen_id" placeholder="กรอกรหัสนิสิต">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="inputPassword4">เบอร์โทรศัพท์</label>
@@ -273,6 +273,27 @@ if ($data['dep_id'] == $item['dep_id']) {
                     </div>
 
                     <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label for="brand">ประเภทเครื่อง</label>
+                            <select name="m_id" required class="form-control">
+                                <!-- <option selected>เลือก</option> -->
+                                <?php
+
+        $sql = "SELECT * FROM machine";
+        $rs = mysqli_query($conn, $sql);
+
+        while ($data = mysqli_fetch_array($rs)) {
+            ?>
+                                <option value="<?=$data['m_id'];?>" <?php
+if ($data['m_id'] == $item['m_id']) {
+                echo "selected";
+            }
+            ?>><?=$data['m_name'];?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+
                         <div class="form-group col-md-6">
                             <label for="brand">ยี่ห้อ</label>
                             <select required name="bid" class="form-control">
@@ -314,19 +335,19 @@ if ($data['mtype_id'] == $item['mtype_id']) {
                             </select>
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="inputEmail4">สิ่งที่มาพร้อมเครื่อง</label>
                             <input type="nameincluded" class="form-control" required
                                 value="<?=$item["sr_u_fname_th"];?>" name="sr_item_user"
                                 placeholder="ไม่มีให้ใส่เครื่องหมาย">
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="inputCity">ข้อมูลสำคัญที่ต้องเก็บ</label>
                             <input type="text" class="form-control" required value="<?=$item["sr_u_fname_th"];?>"
                                 name="sr_Important_data" placeholder="เช่น Drive D">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label for="inputCity">รหัสเข้าเครื่อง</label>
                             <input type="text" value="<?=$item["sr_u_fname_th"];?>" name="sr_password_machine" required
                                 class="form-control" placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
