@@ -1,10 +1,17 @@
+<?php
+if (isset($_GET["sr_id"])) {
+    $sr_id = $_GET["sr_id"];
+    ?>
+
+
 <!doctype html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta value="<?=$item["sr_u_fname_th"];?>" name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
@@ -186,9 +193,16 @@
 
                 <?php
 include_once "./connect_db.php";
-?>
+    ?>
 
-                <form action="insert_data.php" method="post">
+                <form action="update_data.php" method="post">
+                    <?php
+$sql_i = "SELECT * FROM services_requests WHERE sr_id='$sr_id'";
+    $result_i = mysqli_query($conn, $sql_i);
+
+    while ($item = mysqli_fetch_assoc($result_i)) {
+        ?>
+
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="title_name">คำนำหน้าชื่อ</label>
@@ -196,39 +210,44 @@ include_once "./connect_db.php";
                                 <!-- <option selected>เลือก</option> -->
                                 <?php
 $sql = "SELECT * FROM title_name";
-$result = mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
 
-while ($row = mysqli_fetch_assoc($result)) {?>
-                                <option value="<?=$row["tid"];?>"><?=$row["tname"];?></option>
+        while ($row = mysqli_fetch_assoc($result)) {?>
+                                <option value="<?=$row["tid"];?>" <?php
+if ($item["tid"] = $row["tid"]) {
+            echo "selected";
+        }
+            ?>><?=$row["tname"];?></option>
                                 <?php
 }
 
-?>
+        ?>
                             </select>
                         </div>
 
                         <div class="form-group col-md-5">
                             <label for="inputEmail4">ชื่อ-สกุล</label>
                             <input required type="text" class="form-control" name="sr_u_fname_th"
-                                placeholder="กรอกชื่อ-นามสกุล">
+                                placeholder="กรอกชื่อ-นามสกุล" value="<?=$item["sr_u_fname_th"];?>">
                         </div>
                         <div class="form-group col-md-5">
                             <label for="inputPassword4">ชื่อ-สกุล ภาษาอังกฤษ</label>
-                            <input type="text" class="form-control" name="sr_u_fname_en" required
-                                placeholder="Name-Surname">
+                            <input type="text" class="form-control" value="<?=$item["sr_u_fname_en"];?>"
+                                name="sr_u_fname_en" required placeholder="Name-Surname">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">E-mail</label>
-                            <input type="email" class="form-control" name="sr_email" required placeholder="กรอก E-mail">
+                            <input type="email" class="form-control" value="<?=$item["sr_email"];?>" name="sr_email"
+                                required placeholder="กรอก E-mail">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">รหัสนิสิต</label>
-                            <input type="text" required class="form-control" name="sr_std_id"
-                                placeholder="กรอกรหัสนิสิต">
+                            <input type="text" required class="form-control" value="<?=$item["sr_std_id"];?>"
+                                name="sr_std_id" placeholder="กรอกรหัสนิสิต">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="inputPassword4">เบอร์โทรศัพท์</label>
-                            <input type="text" required class="form-control" name="sr_tel"
+                            <input type="text" required class="form-control" value="<?=$item["sr_tel"];?>" name="sr_tel"
                                 placeholder="กรอกเบอร์โทรศัพท์">
                         </div>
                     </div>
@@ -239,12 +258,16 @@ while ($row = mysqli_fetch_assoc($result)) {?>
                             <!-- <option selected>เลือก</option> -->
                             <?php
 
-$sql = "SELECT * FROM department";
-$rs = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM department";
+        $rs = mysqli_query($conn, $sql);
 
-while ($data = mysqli_fetch_array($rs)) {
-    ?>
-                            <option value="<?=$data['dep_id'];?>"><?=$data['dep_name'];?></option>
+        while ($data = mysqli_fetch_array($rs)) {
+            ?>
+                            <option value="<?=$data['dep_id'];?>" <?php
+if ($data['dep_id'] == $item['dep_id']) {
+                echo "selected";
+            }
+            ?>><?=$data['dep_name'];?></option>
                             <?php }?>
                         </select>
                     </div>
@@ -257,12 +280,16 @@ while ($data = mysqli_fetch_array($rs)) {
 
                                 <?php
 
-$sql = "SELECT * FROM brand";
-$rs = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM brand";
+        $rs = mysqli_query($conn, $sql);
 
-while ($data = mysqli_fetch_array($rs)) {
-    ?>
-                                <option value="<?=$data['bid'];?>"><?=$data['bname'];?></option>
+        while ($data = mysqli_fetch_array($rs)) {
+            ?>
+                                <option value="<?=$data['bid'];?>" <?php
+if ($data['bid'] == $item['bid']) {
+                echo "selected";
+            }
+            ?>><?=$data['bname'];?></option>
                                 <?php }?>
                             </select>
                         </div>
@@ -273,31 +300,36 @@ while ($data = mysqli_fetch_array($rs)) {
                                 <!-- <option selected>เลือก</option> -->
                                 <?php
 
-$sql = "SELECT * FROM machine_type";
-$rs = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM machine_type";
+        $rs = mysqli_query($conn, $sql);
 
-while ($data = mysqli_fetch_array($rs)) {
-    ?>
-                                <option value="<?=$data['mtype_id'];?>"><?=$data['mtype_name'];?></option>
+        while ($data = mysqli_fetch_array($rs)) {
+            ?>
+                                <option value="<?=$data['mtype_id'];?>" <?php
+if ($data['mtype_id'] == $item['mtype_id']) {
+                echo "selected";
+            }
+            ?>><?=$data['mtype_name'];?></option>
                                 <?php }?>
                             </select>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="inputEmail4">สิ่งที่มาพร้อมเครื่อง</label>
-                            <input type="nameincluded" class="form-control" required name="sr_item_user"
+                            <input type="nameincluded" class="form-control" required
+                                value="<?=$item["sr_u_fname_th"];?>" name="sr_item_user"
                                 placeholder="ไม่มีให้ใส่เครื่องหมาย">
                         </div>
 
                         <div class="form-group col-md-4">
                             <label for="inputCity">ข้อมูลสำคัญที่ต้องเก็บ</label>
-                            <input type="text" class="form-control" required name="sr_Important_data"
-                                placeholder="เช่น Drive D">
+                            <input type="text" class="form-control" required value="<?=$item["sr_u_fname_th"];?>"
+                                name="sr_Important_data" placeholder="เช่น Drive D">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputCity">รหัสเข้าเครื่อง</label>
-                            <input type="text" name="sr_password_machine" required class="form-control"
-                                placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
+                            <input type="text" value="<?=$item["sr_u_fname_th"];?>" name="sr_password_machine" required
+                                class="form-control" placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
                         </div>
                         <div class="col-md-6">
                             <label for="cause">สาเหตุเบื้องต้น</label>
@@ -305,32 +337,48 @@ while ($data = mysqli_fetch_array($rs)) {
                                 <!-- <option selected>เลือก</option> -->
                                 <?php
 
-$sql = "SELECT * FROM cause";
-$rs = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM cause";
+        $rs = mysqli_query($conn, $sql);
 
-while ($data = mysqli_fetch_array($rs)) {
-    ?>
-                                <option value="<?=$data['cid'];?>"><?=$data['cname'];?></option>
+        while ($data = mysqli_fetch_array($rs)) {
+            ?>
+                                <option value="<?=$data['cid'];?>" <?php
+if ($data['cid'] == $item['cid']) {
+                echo "selected";
+            }
+            ?>><?=$data['cname'];?></option>
                                 <?php }?>
                             </select>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label for="inputCity">สาเหตุอื่นๆ</label>
-                            <input required type="text" name="sr_c_orther" class="form-control"
-                                placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
+                            <input required type="text" value="<?=$item["sr_u_fname_th"];?>" name="sr_c_orther"
+                                class="form-control" placeholder="ไม่มีให้ใส่เครื่องหมาย(-)">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="inputCity">เลขบัตรประชาชน 13 หลัก</label>
-                            <input type="text" required class="form-control" name="sr_id_card_number"
-                                placeholder="เฉพาะนิสิตที่นำมาติดตั้ง Windows/Microsoft 365">
+                            <input type="text" required class="form-control" value="<?=$item["sr_u_fname_th"];?>"
+                                name="sr_id_card_number" placeholder="เฉพาะนิสิตที่นำมาติดตั้ง Windows/Microsoft 365">
                         </div>
+
+                        <input type="hidden" class="form-control" value="<?=$item["sr_u_fname_th"];?>" name="sr_id"
+                            value="<?=$sr_id?>">
 
                     </div>
                     <div align="center">
-                        <button type="submit" name="inser_C1_tSubmit" class="btn btn-primary">บันทึกข้อมูล</button>
+                        <button type="submit" value="<?=$item["sr_u_fname_th"];?>" name="update_C1_tSubmit"
+                            class="btn btn-warning">เเก้ไขข้อมูล</button>
                         <a href="./index.php" type="button" class="btn btn-danger">ยกเลิก</a>
                     </div>
+
+                    <?php
+}
+    ?>
                 </form>
         </td>
         <!-- รูปตังอย่าง -->
+
+        <?php
+}
+?>

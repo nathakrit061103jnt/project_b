@@ -176,7 +176,7 @@
         </nav>
         <!-- เมนู -->
 
-        <!-- รูปตังอย่าง -->
+
         <td align="left" bgcolor="#FFFFFF">
             <div class="card ">
                 <h2>แบบฟอร์มขอรับบริการ
@@ -218,37 +218,35 @@ while ($row = mysqli_fetch_assoc($result)) {?>
                                 placeholder="Name-Surname">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputEmail4">E-mail</label>
-                            <input type="email" class="form-control" name="sr_email" required placeholder="กรอก E-mail">
-                        </div>
-                        <div class="form-group col-md-6">
                             <label for="inputPassword4">รหัสนิสิต</label>
                             <input type="text" required class="form-control" name="sr_std_id"
                                 placeholder="กรอกรหัสนิสิต">
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">E-mail</label>
+                            <input type="email" class="form-control" name="sr_email" required placeholder="กรอก E-mail">
+                        </div>
+                        <div class="form-group col-md-4">
                             <label for="inputPassword4">เบอร์โทรศัพท์</label>
                             <input type="text" required class="form-control" name="sr_tel"
                                 placeholder="กรอกเบอร์โทรศัพท์">
                         </div>
-                    </div>
-
-                    <div class="form-group col-md-15">
-                        <label for="Dep">คณะ/หน่วยงาน</label>
-                        <select required name="dep_id" class="form-control">
-                            <!-- <option selected>เลือก</option> -->
-                            <?php
+                        <div class="form-group col-md-8">
+                            <label for="Dep">คณะ/หน่วยงาน</label>
+                            <select required name="dep_id" class="form-control">
+                                <!-- <option selected>เลือก</option> -->
+                                <?php
 
 $sql = "SELECT * FROM department";
 $rs = mysqli_query($conn, $sql);
 
 while ($data = mysqli_fetch_array($rs)) {
     ?>
-                            <option value="<?=$data['dep_id'];?>"><?=$data['dep_name'];?></option>
-                            <?php }?>
-                        </select>
+                                <option value="<?=$data['dep_id'];?>"><?=$data['dep_name'];?></option>
+                                <?php }?>
+                            </select>
+                        </div>
                     </div>
-
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="brand">ยี่ห้อ</label>
@@ -333,4 +331,3 @@ while ($data = mysqli_fetch_array($rs)) {
                     </div>
                 </form>
         </td>
-        <!-- รูปตังอย่าง -->
