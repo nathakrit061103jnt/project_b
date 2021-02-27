@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2021 at 05:27 AM
+-- Generation Time: Feb 27, 2021 at 10:37 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -246,8 +246,17 @@ CREATE TABLE `services_requests` (
   `sr_id_card_number` varchar(20) DEFAULT '0' COMMENT 'เลขบัตรประชาชน 13 หลัก',
   `ut_id` int(11) NOT NULL COMMENT 'รปะเภทของผู้ขอรับบริการ',
   `sr_machine_number` varchar(100) DEFAULT NULL COMMENT 'หมายเลขเครื่อง',
-  `sr_user_position` varchar(100) DEFAULT NULL COMMENT 'ตำแหน่ง กรณีผู้ขอรับบริการ ไม่ใช่นิสต'
+  `sr_user_position` varchar(100) DEFAULT NULL COMMENT 'ตำแหน่ง กรณีผู้ขอรับบริการ ไม่ใช่นิสต',
+  `sr_std_id` varchar(20) NOT NULL DEFAULT '0' COMMENT 'รหัสนิสิต'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ตารางการขอรับบริการ';
+
+--
+-- Dumping data for table `services_requests`
+--
+
+INSERT INTO `services_requests` (`sr_id`, `tid`, `sr_u_fname_th`, `sr_u_fname_en`, `sr_email`, `sr_tel`, `dep_id`, `bid`, `mtype_id`, `sr_item_user`, `sr_Important_data`, `sr_password_machine`, `cid`, `sr_c_orther`, `sr_id_card_number`, `ut_id`, `sr_machine_number`, `sr_user_position`, `sr_std_id`) VALUES
+(22, 0, 'หกดกก', '', '', '', 0, 0, 0, '', '', '', 0, '', '0', 0, NULL, NULL, '0'),
+(23, 2, 'i', 'opppp', 'azdmin@gmail.com', '061', 3, 2, 2, 'iooos', 'iooos', 'iooos', 2, 'iooos', '48', 1, 'g', 'fkkk', '0610325');
 
 -- --------------------------------------------------------
 
@@ -487,7 +496,7 @@ ALTER TABLE `machine_type`
 -- AUTO_INCREMENT for table `services_requests`
 --
 ALTER TABLE `services_requests`
-  MODIFY `sr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีการขอรับบริการ', AUTO_INCREMENT=22;
+  MODIFY `sr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ไอดีการขอรับบริการ', AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `success`
